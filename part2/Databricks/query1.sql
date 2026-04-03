@@ -6,7 +6,7 @@ WITH top_hh24 AS (
     SELECT EXTRACT(day FROM tpep_pickup_datetime) AS day,
            EXTRACT(hour FROM tpep_dropoff_datetime) AS hh24,
            COUNT(1) AS n
-    FROM default.taxi
+    FROM nyc_taxi_22_25
     GROUP BY 1, 2
   ) foo
   GROUP BY 1
@@ -20,7 +20,7 @@ top_vendor AS (
     SELECT EXTRACT(day FROM tpep_pickup_datetime) AS day,
            VendorID,
            SUM(COALESCE(passenger_count, 0)) AS n_pass
-    FROM default.taxi t1
+    FROM nyc_taxi_22_25 t1
     JOIN top_hh24 t2
       ON (EXTRACT(hour FROM t1.tpep_pickup_datetime) = t2.hh24)
     GROUP BY 1, 2
@@ -31,6 +31,6 @@ top_vendor AS (
 )
 SELECT VendorID,
        SUM(total_amount) AS total_revenue
-FROM default.taxi
+FROM nyc_taxi_22_25
 JOIN top_vendor USING (VendorID)
 GROUP BY 1;

@@ -9,17 +9,7 @@ In the second part, you will then import this same data into BigQuery and run th
 **As a note, this lab will likely trigger some pop-up windows prompting login, and if you are using Safari pop-ups are sometimes blocked. Just check the URL box to see if this is happening and you can open pop-ups from there, or use another browser like Firefox or Chrome.**
 Additionally, in this process you may be redirected and asked to login by selecting your google account a few times. That is normal, just click through that process, and allow Databricks the permissions it requests for. 
 
-# Submission 
-## Where to Submit
-Accept the Github classroom link for HW2 posted on Canvas. This will create a Github repo for you and please push your writeup to that repo.  
-
-## Writeup Requirements 
-Include the following information:
-1. Performance information for each query. In part 2 include the performance for both BigQuery and Databricks.
-2. Some analysis of this data. What queries seem to have the same performance accross platforms? What have different? For those that are different, do you have hypotheses on what is making the performance different?
-3. Any feedback you have on the assignment, relative difficulty, or other information.
-
-## Assignment Setup 
+## Databricks Setup 
 ### Prepare Databricks
 Go to the link for [Databricks on GCP](https://cloud.google.com/databricks?hl=en) and then click "Try on Marketplace".
 
@@ -65,7 +55,7 @@ Next, we're going to go back to our GCP page. In the upper part of the screen, y
 
 <img width="762" alt="image" src="https://github.com/user-attachments/assets/57905d80-84f1-4443-9298-25c40831679c" />
 
-Once you're logged in, you'll see a workspaces tab on the left hand nav bar. Select that and select "Create Workspace." You will be brought to a page which asks you to give the workspace a name ***make this data342 to fit with the pre-written SQL workload***, pick a GCP region (I chose us-east-1), and paste the project ID you copied in the previous step. Then click "Create workspace."
+Once you're logged in, you'll see a workspaces tab on the left hand nav bar. Select that and select "Create Workspace." You will be brought to a page which asks you to give the workspace a name, pick a GCP region (I chose us-east-1), and paste the project ID you copied in the previous step. Then click "Create workspace."
 
 <img width="1511" alt="image" src="https://github.com/user-attachments/assets/de404b8d-1235-45bf-bdef-42256f265146" />
 
@@ -175,7 +165,7 @@ PY
 
 ## Run SQL Queries and Record Performance
 
-Go to the SQL Editor in the nav-bar on the left. This will open a window where you can write or paste SQL queries. You can access the table by using the format `WORKSPACE_NAME.default.TABLE_NAME`, i.e. `data342.default.taxi_data` as shown below. You can then run the query and see the results and the runtime as well in that same page. 
+Go to the SQL Editor in the nav-bar on the left. This will open a window where you can write or paste SQL queries. You can access the table by using the format `WORKSPACE_NAME.default.TABLE_NAME`, i.e. `workspace.default.taxi_data` as shown below. You can then run the query and see the results and the runtime as well in that same page. 
 
 <img width="1510" alt="image" src="https://github.com/user-attachments/assets/94b3d54f-5b48-4130-aab6-24f5f830e795" />
 
@@ -183,7 +173,7 @@ Go to the SQL Editor in the nav-bar on the left. This will open a window where y
 
 We will be using Google Cloud for this class. New accounts should be able to receive $300 in credits (use your personal email id), as well as access to a free-tier of cloud usage. If you have already used these credits please contact us so we can make sure you have the resources you need to complete the assignments. 
 
-## Loading data into BigQuery 
+### Loading data into BigQuery 
 First you will want to upload the taxi data to Google Cloud Storage. Navigate to the Google Cloud Storage window, create a bucket with a name of your choosing (default options are fine). You can then upload the Parquet files directly to this bucket from the web UI. If you wish to do this via CLI, you can follow the guide [here](https://cloud.google.com/sdk/docs/install).  
 
 Next, once data is uploaded, navigate to BigQuery via the left-hand navigation bar (enable the BigQuery API if it prompts you to). Once there, navigate to BigQuery studio, where it should list a project. **Make sure to note the project ID as this will be important in the next step.** 
@@ -210,6 +200,15 @@ In part 2, SQL query files are located in two folders: `BigQuery` and `Databrick
 You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs. Please execute the `Databricks` query on multiple clusters (1-4) and provide your analysis on the performance difference by either using EXPLAIN or looking at execution graphs. 
 
 Run each query, record the runtime in each system, and present this in your writeup, either in a table or other format. 
+
+## Submission 
+Accept the Github classroom link for HW2 posted on Canvas. This will create a Github repo for you and please push your writeup to that repo.  
+
+## Writeup Requirements 
+Include the following information:
+1. Performance information for each query. In part 2 include the performance for both BigQuery and Databricks.
+2. Some analysis of this data. What queries seem to have the same performance accross platforms? What have different? For those that are different, do you have hypotheses on what is making the performance different?
+3. Any feedback you have on the assignment, relative difficulty, or other information.
 
 
 

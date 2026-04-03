@@ -9,7 +9,7 @@ WITH summary_statistics AS (
 	  PULocationID,
 	  DOLocationID,
       TIMESTAMP_DIFF(tpep_dropoff_datetime, tpep_pickup_datetime, minute) AS elapsed
-    FROM data342.taxi
+    FROM data342.nyc_taxi_22_25
     WHERE TIMESTAMP_DIFF(tpep_dropoff_datetime, tpep_pickup_datetime, minute) > 0
   )
   GROUP BY PULocationID, DOLocationID
@@ -25,9 +25,8 @@ FROM (
     max_elapsed,
     DATE_DIFF(tpep_dropoff_datetime, tpep_pickup_datetime, minute) AS elapsed,
     t1.*
-  FROM data342.taxi AS t1
+  FROM data342.nyc_taxi_22_25 AS t1
   LEFT JOIN summary_statistics AS t2
     USING (PULocationID, DOLocationID)
 ) foo
-WHERE is_fraud
-LIMIT 10;
+WHERE is_fraud;

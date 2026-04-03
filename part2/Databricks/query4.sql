@@ -7,4 +7,4 @@ SELECT year, VendorID, total_rev,
        avg (total_rev) over(partition by VendorID order by year RANGE BETWEEN 3 PRECEDING AND CURRENT ROW) gross_moving_avg_rev
 FROM (
     SELECT extract(year from tpep_pickup_datetime) AS year, VendorID, sum(total_amount) as total_rev
-    FROM taxi group by 1,2) foo;
+    FROM nyc_taxi_22_25 group by 1,2) foo;
