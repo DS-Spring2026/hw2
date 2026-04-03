@@ -1,4 +1,4 @@
-# HW2
+# Homework 2
 
 In this assignment, you will be using Databricks on Google Cloud Platform (GCP), creating two tables with data from the yellow cab NYC Taxi Dataset [NYC Taxi Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), and then running a set of SQL queries against that table. 
 
@@ -19,8 +19,8 @@ Include the following information:
 2. Some analysis of this data. What queries seem to have the same performance accross platforms? What have different? For those that are different, do you have hypotheses on what is making the performance different?
 3. Any feedback you have on the assignment, relative difficulty, or other information.
 
-# Assignment Description 
-## Prepare Databricks
+## Assignment Setup 
+### Prepare Databricks
 Go to the link for [Databricks on GCP](https://cloud.google.com/databricks?hl=en) and then click "Try on Marketplace".
 
 <img width="1098" alt="image" src="https://github.com/user-attachments/assets/2706b2cf-87ac-4fe7-bc2c-45d27c601010" />
