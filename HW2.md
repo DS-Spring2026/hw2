@@ -203,9 +203,11 @@ Repeat this, but do it for an **EXTERNAL** table as well. You will run each quer
 ## SQL Workload 
 Now that we have this setup, we're going to run a SQL workload in Databricks. There are two parts to this homework, you can find the queries for each part within this repo.
 
-In part 1, the queries have to be executed in Databricks. Make sure you are having multiple clusters in your SQL warehourse before exeuction. Your write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
+In part 1, the queries have to be executed in Databricks. Make sure you are having multiple clusters in your SQL warehouse before execution. Your write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
 
-In part 2, SQL query files are located in `BigQuery` and `Databricks` folders. You're going to run each query first against the Databricks table, and then against both BigQuery table versions (using INTERNAL and EXTERNAL Tables). You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs. Please execute the databricks query on multiple clusters (1-4) and provide your analysis on the performance difference by either using EXPLAIN or looking at execution graphs. 
+In part 2, SQL query files are located in two folders: `BigQuery` and `Databricks`. You're going to run each query first against the Databricks table, and then against the BigQuery table. For the first query in part 2 please report number using both the INTERNAL and EXTERNAL Tables. For queries 2-4 you may report just Databricks and internal BigQuery performance. 
+
+You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs. Please execute the `Databricks` query on multiple clusters (1-4) and provide your analysis on the performance difference by either using EXPLAIN or looking at execution graphs. 
 
 Run each query, record the runtime in each system, and present this in your writeup, either in a table or other format. 
 
