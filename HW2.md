@@ -17,8 +17,7 @@ Accept the Github classroom link for HW2 posted on Canvas. This will create a Gi
 Include the following information:
 1. Performance information for each query. In part 2 include the performance for both BigQuery and Databricks.
 2. Some analysis of this data. What queries seem to have the same performance accross platforms? What have different? For those that are different, do you have hypotheses on what is making the performance different?
-3. How you found deploying Databricks, building tables, and running queries compared to the same process natively in GCP and BigQuery
-4. Any feedback you have on the assignment, relative difficulty, or other information.
+3. Any feedback you have on the assignment, relative difficulty, or other information.
 
 # Assignment Description 
 ## Prepare Databricks
@@ -204,9 +203,9 @@ Repeat this, but do it for an **EXTERNAL** table as well. You will run each quer
 ## SQL Workload 
 Now that we have this setup, we're going to run a SQL workload in Databricks. There are two parts to this homework, you can find the queries for each part within this repo.
 
-In part 1, the queries have to be executed in Databricks. Your write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
+In part 1, the queries have to be executed in Databricks. Make sure you are having multiple clusters in your SQL warehourse before exeuction. Your write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
 
-In part 2, SQL query files are located in `BigQuery` and `Databricks` folders. You're going to run each query first against the Databricks table, and then against both BigQuery table versions (using INTERNAL and EXTERNAL Tables). You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs.
+In part 2, SQL query files are located in `BigQuery` and `Databricks` folders. You're going to run each query first against the Databricks table, and then against both BigQuery table versions (using INTERNAL and EXTERNAL Tables). You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs. Please execute the databricks query on multiple clusters (1-4) and provide your analysis on the performance difference by either using EXPLAIN or looking at execution graphs. 
 
 Run each query, record the runtime in each system, and present this in your writeup, either in a table or other format. 
 
