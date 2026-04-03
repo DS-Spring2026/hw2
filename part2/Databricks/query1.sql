@@ -1,3 +1,4 @@
+SET use_cached_result = false;
 WITH top_hh24 AS (
   SELECT hh24,
          AVG(n) AS num_avg_trip

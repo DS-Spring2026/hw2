@@ -1,3 +1,4 @@
+SET use_cached_result = false;
 WITH summary_statistics AS (
   SELECT
 	PULocationID,

@@ -1,3 +1,4 @@
+SET use_cached_result = false;
 SELECT year, VendorID, total_rev,
        sum(total_rev) over(partition by VendorID) gross_total_rev,
        sum(total_rev) over (partition by VendorID order by year) gross_moving_total_rev,

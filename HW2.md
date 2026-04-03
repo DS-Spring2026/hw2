@@ -2,7 +2,7 @@
 
 In this assignment, you will be using Databricks on Google Cloud Platform (GCP), creating two tables with data from the yellow cab NYC Taxi Dataset [NYC Taxi Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page), and then running a set of SQL queries against that table. 
 
-There will be two parts to the analytical portion of the assigment. In the first part you will upload the data into Databricks, and run queries that will show common error cases and pitfalls in distributed data work.
+There will be two parts to the analytical portion of the assigment. In the first part you will run a set of SQL queries in Databricks designed to reflect different workload patterns (for example, varying selectivity, aggregation/join complexity, and effective data scanned) in distributed data work.
 
 In the second part, you will then import this same data into BigQuery and run the same queries against that table. You will measure the runtimes of each and compare the performance of the SQL workload on BigQuery and Databricks.
 
@@ -11,12 +11,12 @@ Additionally, in this process you may be redirected and asked to login by select
 
 # Submission 
 ## Where to Submit
-Accept the Github classroom link for HW2 posted on Ed. This will create a Github repo for you. Then, push your writeup and any code you wrote to that repo in the `HW2` folder. 
+Accept the Github classroom link for HW2 posted on Canvas. This will create a Github repo for you and please push your writeup to that repo.  
 
 ## Writeup Requirements 
 Include the following information:
 1. Performance information for each query. In part 2 include the performance for both BigQuery and Databricks.
-2. Some analysis of this data. What queries seem to have the same performance? What have different? For those that are different, do you have hypotheses on what is making the performance different?
+2. Some analysis of this data. What queries seem to have the same performance accross platforms? What have different? For those that are different, do you have hypotheses on what is making the performance different?
 3. How you found deploying Databricks, building tables, and running queries compared to the same process natively in GCP and BigQuery
 4. Any feedback you have on the assignment, relative difficulty, or other information.
 
@@ -73,17 +73,14 @@ Once you're logged in, you'll see a workspaces tab on the left hand nav bar. Sel
 <img width="1029" alt="image" src="https://github.com/user-attachments/assets/40afaa0e-f445-404a-960b-77cf0df49347" />
 
 ## Create Table
-Finally, we want to create a table! Go back to the Workspaces page and wait for the workspace to be created and for the status to be "Running". Once that's the case, hit the "Open" button labelled in the image below.
+Download the yellow-cab Parquet data files from January 2022 to December 2025 (total of 48 files) and merge them into a single file using the below script (total file size would be around 3GB). Upload the merged Parquet file into a single table by first creating a volume and uploading the file to that volume, then reading the data from the volume and executing SQL like the example below.
 
-<img width="1311" alt="image" src="https://github.com/user-attachments/assets/25223b77-7869-4fd0-b75e-354bb5a1ef06" />
-
-You will be taken to a page with a nav-bar in the left hand side. Select Catalog, then select the workspace name you chose earlier (for me it was Data342) and click default. Then click "Create > Create Table" as shown below. 
-
-<img width="1512" alt="image" src="https://github.com/user-attachments/assets/aa0ced77-4048-4135-b63c-6def0b715a6c" />
-
-You will be brought to a page where you are asked to upload files. Upload the yellow-cab data Parquet files you downloaded for **January 2022 to December 2025** you downloaded earlier from the NYC taxi site into a single table. Once these are done uploading, you'll be taken to the following page, where you can rename the table under Table Name.
-
-<img width="1512" alt="image" src="https://github.com/user-attachments/assets/96b554e3-8123-4122-89c1-0dd41a7caf71" />
+```sql
+CREATE TABLE nyc_taxi_22_25
+USING PARQUET
+LOCATION '/Volumes/<catalog>/<schema>/<volume>/<your_file>.pq'; 
+```
+Please also download the csv file "Taxi Zone Lookup Table (CSV)" mentioned under Taxi Zone Maps and Lookup Tables in the NYC Taxi Data website and upload it to databricks and create a table named "taxi_zone_lookup".
 
 Once the table is done, you are ready to query data!
 
@@ -91,7 +88,7 @@ Once the table is done, you are ready to query data!
 Once you have combined the files you can upload the single merged file to Google Cloud and Databricks.
 
 ```bash
-python3 - <<'PY'                                                                                                                                                                                                                                                                          grzenda
+python3 - <<'PY'                                            
 import polars as pl
 from pathlib import Path
 
@@ -202,22 +199,14 @@ Data can also be loaded into BigQuery. This requires more time, as data must be 
 - [Load Data Internal](https://cloud.google.com/bigquery/docs/loading-data)
 
 After the setup, import data from January 2022 to December 2025 yellow-cab Parquet files into a single BigQuery **INTERNAL** table. 
-Repeat this, but do it for an **EXTERNAL** table as well. You will run each query against both table options. Name your dataset within BigQuery **Data342** to avoid having to edit the pre-written SQL workload.
+Repeat this, but do it for an **EXTERNAL** table as well. You will run each query against both table options. Name your dataset within BigQuery **data342** to avoid having to edit the pre-written SQL workload.
 
 ## SQL Workload 
 Now that we have this setup, we're going to run a SQL workload in Databricks. There are two parts to this homework, you can find the queries for each part within this repo.
 
-In part 1, the queries only need to be executed in Databricks. You're write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
+In part 1, the queries have to be executed in Databricks. Your write-up will include the performance results and explanations for why some queries performed better in each of the three files (1,2,3). 
 
-In part 2, SQL query files are located in `BigQuery` and `Databricks` folders. You're going to run each query first against the Databricks table, and then against both BigQuery table versions (using standard, built-in tables that are stored internally as well as tables which are externally stored). You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs.
-
-These queries are written to assume that in BigQuery your **dataset** is named
-**DATA342** and all data is imported into a single table entitled **TAXI**. In
-Databricks, the queries assume you created a workspace entitled **DATA342**, and
-within the **default** catalog you create a table called **TAXI**. If you have
-alternate names, you must tweak the queries to change the tables listed in the
-FROM clause. We advise **not** changing column names from the default definitions in the Parquet
-files as this  would require many more SQL changes.
+In part 2, SQL query files are located in `BigQuery` and `Databricks` folders. You're going to run each query first against the Databricks table, and then against both BigQuery table versions (using INTERNAL and EXTERNAL Tables). You can copy and paste the queries into the editors, or read documentation online to setup APIs to execute SQL queries via APIs.
 
 Run each query, record the runtime in each system, and present this in your writeup, either in a table or other format. 
 
